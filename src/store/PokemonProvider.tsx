@@ -3,7 +3,7 @@ import PokemonContext from "./pokemon-context";
 
 const initialState = {
   pokemons: [{}],
-  pokemonDetails: { name: "", types: [] },
+  pokemonDetails: { name: "", types: [], height: "", weight: "", id: "" },
 };
 
 const reducerFunction = (state: any, action: any) => {
