@@ -1,7 +1,10 @@
-import { Box, Card, Heading, Stack, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import useFetchPokemonDetails from "../hooks/useFetchPokemonDetails";
 
-const PokemonDetailCard = () => {
+const PokemonDetailCard = (props: any) => {
+  useFetchPokemonDetails(props.id);
+  // console.log(props.id);
+
   return (
     <Stack>
       <Box>Modal</Box>

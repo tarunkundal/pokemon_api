@@ -6,7 +6,6 @@ import {
   Image,
   Stack,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import useFetchPokemonDetails from "../hooks/useFetchPokemonDetails";
 import BackdropOverlay from "./Modal";
@@ -27,7 +26,7 @@ const PokemonCard = (props: any) => {
     <>
       {isOpen && (
         <BackdropOverlay isOpen={isOpen} onClose={closeModal}>
-          <PokemonDetailCard />
+          <PokemonDetailCard id={pokemonId} />
         </BackdropOverlay>
       )}
       <Card

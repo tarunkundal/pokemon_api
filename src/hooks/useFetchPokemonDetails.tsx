@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { usePokemonStore } from "../store/PokemonProvider";
 
 const useFetchPokemonDetails = async (id: number) => {
@@ -8,19 +8,19 @@ const useFetchPokemonDetails = async (id: number) => {
     if (pokemons.length === null || undefined) {
       return;
     }
+    let data: string | any[] = [];
+
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const result = await res.json();
+    data.concat(result);
 
-    const data = [];
-    data.push(result);
-    setPokemonDetails(data);
-  }, [id]);
+    console.log(data);
+  }, [id, pokemons.length]);
 
-  useEffect(() => {
-    fetchData();
-  }, [id]);
+  // useEffect(() => {
+  //   fetchData();
+  // }, [fetchData, id]);
+  fetchData();
 };
 
 export default useFetchPokemonDetails;
-
-// const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);

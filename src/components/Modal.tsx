@@ -1,13 +1,5 @@
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-} from "@chakra-ui/react";
+import { Modal, ModalBody, ModalContent, ModalOverlay } from "@chakra-ui/react";
+import { FiArrowLeft } from "react-icons/fi";
 
 const BackdropOverlay = (props: any) => {
   return (
@@ -15,13 +7,8 @@ const BackdropOverlay = (props: any) => {
       <Modal onClose={props.onClose} isOpen={true}>
         <ModalOverlay />
         <ModalContent>
-          <ModalCloseButton
-            left={"2px"}
-            color={"secondary"}
-            bg={"teritory"}
-            _hover={{ bg: "button" }}
-            size={"md"}
-          />
+          <FiArrowLeft size={25} cursor={"pointer"} onClick={props.onClose} />
+
           <ModalBody> {props.children} </ModalBody>
         </ModalContent>
       </Modal>

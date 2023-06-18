@@ -23,7 +23,7 @@ const Body = () => {
         gridGap={"9"}
         p={"5%"}
       >
-        {pokemons.slice(0, pokemonNumbersToShow).map((pokemon, i, arr) => {
+        {pokemons.slice(0, pokemonNumbersToShow).map((pokemon, i) => {
           return <PokemonCard pokemon={pokemon} data={i} key={i} />;
         })}
       </Box>
