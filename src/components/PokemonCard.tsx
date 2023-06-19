@@ -7,20 +7,33 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import useFetchPokemonDetails from "../hooks/useFetchPokemonDetails";
 import BackdropOverlay from "./Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PokemonDetailCard from "./PokemonDetailCard";
 
 const PokemonCard = (props: any) => {
+  const [pkColor, setPkColor] = useState();
   const pokemonId = props.data + 1;
-  useFetchPokemonDetails(pokemonId);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const fetchPokemonColor = async () => {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon-species/${pokemonId}/`
+    );
+    const data = await response.json();
+
+    let color = data.color.name;
+    setPkColor(color);
+  };
+
+  useEffect(() => {
+    fetchPokemonColor();
+  }, [pokemonId]);
 
   return (
     <>
@@ -34,7 +47,8 @@ const PokemonCard = (props: any) => {
         w={"400px"}
         h={"270px"}
         m={"1%"}
-        bgColor={"teritory"}
+        bgColor={pkColor === undefined ? "primary" : pkColor}
+        opacity={0.8}
         boxShadow={"2xl"}
         borderRadius={"50px"}
         transition={"0.3s all ease-in "}

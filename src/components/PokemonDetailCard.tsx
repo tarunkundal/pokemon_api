@@ -22,7 +22,6 @@ import { usePokemonStore } from "../store/PokemonProvider";
 const PokemonDetailCard = (props: any) => {
   const { setPokemonDetails, pokemonDetails } = usePokemonStore();
   const [pokemonColor, setPokemonColor] = useState();
-  console.log(props.id);
 
   useEffect(() => {
     const fetchPokemonDetail = async () => {
@@ -90,7 +89,7 @@ const PokemonDetailCard = (props: any) => {
                               : pokemonColor
                           }
                           margin={"5px"}
-                          color={"white"}
+                          color={"gray.200"}
                         >
                           {type.type.name !== "" &&
                             type.type.name.charAt(0).toUpperCase() +
@@ -113,11 +112,11 @@ const PokemonDetailCard = (props: any) => {
             </Center>
           </Stack>
           <Box
-            mt={-24}
+            mt={{ base: -14, md: -24 }}
             minH={"300px"}
             bgColor={pokemonColor === undefined ? "primary" : pokemonColor}
             borderRadius={"10%"}
-            color={"white"}
+            color={"gray.200"}
             opacity={0.7}
           >
             <Tabs colorScheme="whiteAlpha">

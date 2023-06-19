@@ -8,8 +8,24 @@ import {
 } from "@chakra-ui/react";
 
 import { FiSearch } from "react-icons/fi";
+import { useState } from "react";
+import { usePokemonStore } from "../store/PokemonProvider";
 
 const Header = () => {
+  const [pokemonName, setPokemonName] = useState("");
+  const { pokemons } = usePokemonStore();
+
+  const handlePokemonSearch = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    console.log(pokemonName);
+  };
+
+  const filteredPokemon = pokemons.find((pok) => {
+    return pok.name === pokemonName;
+  });
+
+  console.log(filteredPokemon);
+
   return (
     <Stack
       h={"80px"}
@@ -29,23 +45,28 @@ const Header = () => {
         w={"12"}
         left={"2rem"}
       />
-
-      <InputGroup w={"40%"}>
-        <Input
-          placeholder="Search Your Faviourate Pokemon"
-          border={"2px"}
-          borderColor={"teritory"}
-          variant={"outline"}
-          fontWeight={"medium"}
-        />
-        <InputRightElement
-          fontSize={"22px"}
-          color={"button"}
-          _hover={{ cursor: "pointer", color: "teritory" }}
-        >
-          <FiSearch />
-        </InputRightElement>
-      </InputGroup>
+      <Stack w={"40%"}>
+        <form onSubmit={handlePokemonSearch}>
+          <InputGroup>
+            <Input
+              placeholder="Search Your Faviourate Pokemon"
+              border={"2px"}
+              borderColor={"teritory"}
+              variant={"outline"}
+              fontWeight={"medium"}
+              value={pokemonName}
+              onChange={(e) => setPokemonName(e.target.value)}
+            />
+            <InputRightElement
+              fontSize={"22px"}
+              color={"button"}
+              _hover={{ cursor: "pointer", color: "teritory" }}
+            >
+              <FiSearch type="submit" />
+            </InputRightElement>
+          </InputGroup>
+        </form>
+      </Stack>
       <Box />
     </Stack>
   );

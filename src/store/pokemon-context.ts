@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 const PokemonContext = createContext({
-  pokemons: [{}],
+  pokemons: [{ name: "" }],
   setPokemons: (pokemons: {}[]) => {},
   pokemonDetails: {
     name: "",
