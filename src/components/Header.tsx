@@ -8,23 +8,27 @@ import {
 } from "@chakra-ui/react";
 
 import { FiSearch } from "react-icons/fi";
-import { useState } from "react";
-import { usePokemonStore } from "../store/PokemonProvider";
+import { SetStateAction, useEffect, useState } from "react";
+import useFetchPokemonByName from "../hooks/useFetchPokemonByName";
 
 const Header = () => {
-  const [pokemonName, setPokemonName] = useState("");
-  const { pokemons } = usePokemonStore();
+  const [searchVal, setSearchVal] = useState("");
+  useFetchPokemonByName(searchVal);
 
   const handlePokemonSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log(pokemonName);
   };
 
-  const filteredPokemon = pokemons.find((pok) => {
-    return pok.name === pokemonName;
-  });
+  useEffect(() => {
+    const delayBounceFn = setTimeout(() => {}, 2000);
+    return clearTimeout(delayBounceFn);
+  }, [searchVal]);
 
-  console.log(filteredPokemon);
+  const handleValOnChange = (e: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setSearchVal(e.target.value);
+  };
 
   return (
     <Stack
@@ -54,8 +58,8 @@ const Header = () => {
               borderColor={"teritory"}
               variant={"outline"}
               fontWeight={"medium"}
-              value={pokemonName}
-              onChange={(e) => setPokemonName(e.target.value)}
+              value={searchVal}
+              onChange={handleValOnChange}
             />
             <InputRightElement
               fontSize={"22px"}
