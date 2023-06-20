@@ -17,7 +17,6 @@ const Body = () => {
   return (
     <>
       <Box
-        border={"2px"}
         display={{ base: "block", md: "grid" }}
         gridTemplateColumns={{ base: "repeat(2 , 30%)", md: "repeat(3 , 2fr)" }}
         gridGap={"9"}

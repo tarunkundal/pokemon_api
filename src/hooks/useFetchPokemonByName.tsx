@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { usePokemonStore } from "../store/PokemonProvider";
 
 const useFetchPokemonByName = (enteredSeachValue: string) => {
