@@ -21,6 +21,7 @@ const Body = () => {
         gridTemplateColumns={{ base: "repeat(2 , 30%)", md: "repeat(3 , 2fr)" }}
         gridGap={"9"}
         p={"5%"}
+        gridColumn={"auto"}
       >
         {pokemons.slice(0, pokemonNumbersToShow).map((pokemon, i) => {
           return <PokemonCard pokemon={pokemon} data={i} key={i} />;

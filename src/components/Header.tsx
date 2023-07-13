@@ -13,22 +13,33 @@ import useFetchPokemonByName from "../hooks/useFetchPokemonByName";
 
 const Header = () => {
   const [searchVal, setSearchVal] = useState("");
-  useFetchPokemonByName(searchVal);
+  // useFetchPokemonByName(searchVal);
 
-  const handlePokemonSearch = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-  };
+  // debouncing for optimization
+  function debounce(
+    func: (...args: any[]) => void,
+    delay: number
+  ): (...args: any[]) => void {
+    let timeoutId: NodeJS.Timeout | null;
 
-  useEffect(() => {
-    const delayBounceFn = setTimeout(() => {}, 2000);
-    return clearTimeout(delayBounceFn);
-  }, [searchVal]);
+    return (...args: any[]) => {
+      clearTimeout(timeoutId!);
 
+      timeoutId = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  }
+
+  // function
   const handleValOnChange = (e: {
     target: { value: SetStateAction<string> };
   }) => {
     setSearchVal(e.target.value);
+    console.log(e.target.value);
   };
+
+  const debouncedSearch = debounce(handleValOnChange, 500);
 
   return (
     <Stack
@@ -49,8 +60,8 @@ const Header = () => {
         w={"12"}
         left={"2rem"}
       />
-      <Stack w={"40%"}>
-        <form onSubmit={handlePokemonSearch}>
+      <Stack w={"40%"} color={"black"}>
+        <form>
           <InputGroup>
             <Input
               placeholder="Search Your Faviourate Pokemon"
@@ -59,7 +70,8 @@ const Header = () => {
               variant={"outline"}
               fontWeight={"medium"}
               value={searchVal}
-              onChange={handleValOnChange}
+              // onChange={handleValOnChange}
+              // onKeyUp={debouncedSearch}
             />
             <InputRightElement
               fontSize={"22px"}
@@ -77,3 +89,9 @@ const Header = () => {
 };
 
 export default Header;
+function debounceounce(
+  handleValOnChange: (e: { target: { value: SetStateAction<string> } }) => void,
+  arg1: number
+) {
+  throw new Error("Function not implemented.");
+}
