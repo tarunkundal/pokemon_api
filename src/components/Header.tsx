@@ -58,9 +58,9 @@ const Header = () => {
               variant={"outline"}
               fontWeight={"medium"}
               defaultValue={searchVal}
-              // onChange={(e) => setSearchVal(e.target.value)}
               // onChange={processChange}
               onKeyUp={processChange}
+              _placeholder={{ color: "red" }}
             />
             <InputRightElement
               fontSize={"22px"}
