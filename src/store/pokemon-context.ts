@@ -11,6 +11,8 @@ const PokemonContext = createContext({
     height: "",
     weight: "",
     stats: [{ base_stat: 0, stat: { name: "" } }],
+    id: "",
+    sprites: { other: { dream_world: { front_default: "" } } },
   },
   setPokemonDetails: (pokemonDetails: {}) => {},
 });

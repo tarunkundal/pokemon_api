@@ -24,13 +24,14 @@ const PokemonDetailCard = (props: any) => {
   const { setPokemonDetails, pokemonDetails } = usePokemonStore();
   const [pokemonColor, setPokemonColor] = useState();
   const [isLoading, setIsLoding] = useState(false);
+  const pokemonId = pokemonDetails?.id;
 
   useEffect(() => {
     const fetchPokemonDetail = async () => {
       try {
         setIsLoding(true);
         const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${props.id}`
+          `https://pokeapi.co/api/v2/pokemon/${props.pokemon}`
         );
 
         const data = await res.json();
@@ -46,7 +47,7 @@ const PokemonDetailCard = (props: any) => {
     const fetchPokemonColor = async () => {
       try {
         const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon-species/${props.id}/`
+          `https://pokeapi.co/api/v2/pokemon-species/${props.pokemon}/`
         );
         const data = await res.json();
         setPokemonColor(data.color.name);
@@ -56,10 +57,12 @@ const PokemonDetailCard = (props: any) => {
     };
     fetchPokemonColor();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.id]);
+  }, [props.pokemon]);
 
   console.log(pokemonDetails);
   console.log(pokemonColor);
+
+  const svgImgPresent = pokemonDetails.sprites.other.dream_world.front_default;
 
   return (
     <>
@@ -114,12 +117,16 @@ const PokemonDetailCard = (props: any) => {
                         })}
                       </Flex>
                     </Flex>
-                    <Heading opacity={0.3}>#0{props.id}</Heading>
+                    <Heading opacity={0.8}>#0{pokemonId}</Heading>
                   </Flex>
                 </Box>
                 <Center>
                   <Image
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${props.id}.svg`}
+                    src={
+                      svgImgPresent
+                        ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`
+                        : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokemonId}.png`
+                    }
                     alt="Image"
                     boxSize={{ base: 40, md: 56 }}
                     zIndex={2}

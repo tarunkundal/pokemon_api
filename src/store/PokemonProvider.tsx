@@ -11,6 +11,8 @@ const initialState = {
     species: { name: "" },
     abilities: [{ ability: { name: "" } }],
     stats: [{ base_stat: 0, stat: { name: "" } }],
+    id: "",
+    sprites: { other: { dream_world: { front_default: "" } } },
   },
 };
 
