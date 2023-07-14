@@ -11,7 +11,6 @@ import {
 import BackdropOverlay from "./Modal";
 import { useEffect, useState } from "react";
 import PokemonDetailCard from "./PokemonDetailCard";
-import { FiBarChart } from "react-icons/fi";
 
 const PokemonCard = (props: any) => {
   const [pkColor, setPkColor] = useState();
@@ -42,6 +41,7 @@ const PokemonCard = (props: any) => {
 
   useEffect(() => {
     fetchPokemonColor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonId]);
 
   return (

@@ -10,6 +10,7 @@ const useFetchPokemonByName = (enteredSeachValue: string) => {
         setPokemons(pokemons);
         return;
       }
+      // eslint-disable-next-line array-callback-return
       const filterPokemon = pokemons.filter((pokemon) => {
         if (
           pokemon.name.toLowerCase().includes(enteredSeachValue.toLowerCase())
@@ -20,10 +21,9 @@ const useFetchPokemonByName = (enteredSeachValue: string) => {
       setPokemons(filterPokemon);
     };
     filteredPokemons();
-  }, [enteredSeachValue]);
 
-  console.log(enteredSeachValue);
-  console.log(pokemons);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enteredSeachValue]);
 };
 
 export default useFetchPokemonByName;

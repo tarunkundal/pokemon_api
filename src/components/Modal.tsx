@@ -1,5 +1,4 @@
 import {
-  Box,
   Modal,
   ModalBody,
   ModalContent,

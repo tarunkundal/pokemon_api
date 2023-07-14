@@ -8,39 +8,27 @@ import {
 } from "@chakra-ui/react";
 
 import { FiSearch } from "react-icons/fi";
-import { SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import useFetchPokemonByName from "../hooks/useFetchPokemonByName";
+import useDebounce from "../hooks/useDebounce";
 
 const Header = () => {
   const [searchVal, setSearchVal] = useState("");
-  // useFetchPokemonByName(searchVal);
 
-  // debouncing for optimization
-  function debounce(
-    func: (...args: any[]) => void,
-    delay: number
-  ): (...args: any[]) => void {
-    let timeoutId: NodeJS.Timeout | null;
+  useFetchPokemonByName(searchVal);
 
-    return (...args: any[]) => {
-      clearTimeout(timeoutId!);
-
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
-  }
-
-  // function
-  const handleValOnChange = (e: {
-    target: { value: SetStateAction<string> };
-  }) => {
+  // handle onchange
+  const handleOnChange = (e: { target: { value: any } }) => {
     setSearchVal(e.target.value);
-    console.log(e.target.value);
   };
 
-  const debouncedSearch = debounce(handleValOnChange, 500);
+  // debounced func
+  const processChange = useDebounce((e) => handleOnChange(e), 500);
 
+  // submit form handler
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
     <Stack
       h={"80px"}
@@ -61,7 +49,7 @@ const Header = () => {
         left={"2rem"}
       />
       <Stack w={"40%"} color={"black"}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <InputGroup>
             <Input
               placeholder="Search Your Faviourate Pokemon"
@@ -69,9 +57,10 @@ const Header = () => {
               borderColor={"teritory"}
               variant={"outline"}
               fontWeight={"medium"}
-              value={searchVal}
-              // onChange={handleValOnChange}
-              // onKeyUp={debouncedSearch}
+              defaultValue={searchVal}
+              // onChange={(e) => setSearchVal(e.target.value)}
+              // onChange={processChange}
+              onKeyUp={processChange}
             />
             <InputRightElement
               fontSize={"22px"}
@@ -89,9 +78,3 @@ const Header = () => {
 };
 
 export default Header;
-function debounceounce(
-  handleValOnChange: (e: { target: { value: SetStateAction<string> } }) => void,
-  arg1: number
-) {
-  throw new Error("Function not implemented.");
-}

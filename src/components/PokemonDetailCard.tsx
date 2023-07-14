@@ -55,6 +55,7 @@ const PokemonDetailCard = (props: any) => {
       }
     };
     fetchPokemonColor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.id]);
 
   console.log(pokemonDetails);
