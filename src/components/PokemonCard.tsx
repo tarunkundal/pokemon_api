@@ -15,14 +15,19 @@ import { usePokemonStore } from "../store/PokemonProvider";
 
 const PokemonCard = (props: any) => {
   const [pkColor, setPkColor] = useState();
+  const [pokemonId, setPokemonId] = useState();
   const [isLoading, setIsLoding] = useState(false);
   const { pokemonDetails } = usePokemonStore();
-  const pokemonId = props.data + 1;
 
-  // const pokemonId = pokemonDetails.id;
   const pokemonName = props.pokemon.name;
 
-  console.log(props.pokemon);
+  const fetchPokemonId = async () => {
+    const res = await fetch(props.pokemon.url);
+    const data = await res.json();
+
+    setPokemonId(data.id);
+  };
+  fetchPokemonId();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -52,6 +57,8 @@ const PokemonCard = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonName]);
 
+  const svgImgPresent = pokemonDetails.sprites.other.dream_world.front_default;
+
   return (
     <>
       {isOpen && (
@@ -74,11 +81,11 @@ const PokemonCard = (props: any) => {
           transition={"0.3s all ease-in "}
           _hover={{ transform: "scale(1.08)", cursor: "pointer" }}
           bgImage={
-            "url(https://img.freepik.com/free-icon/pokeball_318-694460.jpg?size=626&ext=jpg&ga=GA1.1.823988085.1685946705&semt=ais)"
+            "url('https://cdn-icons-png.flaticon.com/128/3905/3905499.png')"
           }
-          bgSize={"25%"}
+          bgSize={"45%"}
           bgRepeat={"no-repeat"}
-          bgPosition={"top"}
+          bgPosition={"bottom"}
           p={"5px"}
           onClick={() => setIsOpen(true)}
         >
@@ -100,7 +107,9 @@ const PokemonCard = (props: any) => {
                   ml={"50%"}
                 >
                   {"#"}
-                  {+pokemonId < 100 ? (
+                  {pokemonId === undefined ? (
+                    ""
+                  ) : +pokemonId < 100 ? (
                     <>
                       {"0"}
                       {pokemonId}
@@ -111,7 +120,11 @@ const PokemonCard = (props: any) => {
                 </Text>
                 <Image
                   boxSize={"90%"}
-                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`}
+                  src={
+                    svgImgPresent
+                      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`
+                      : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokemonId}.png`
+                  }
                 />
               </Stack>
             </Flex>

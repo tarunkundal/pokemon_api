@@ -13,6 +13,7 @@ import {
   TabPanels,
   Table,
   Tabs,
+  Tbody,
   Td,
   Text,
   Tr,
@@ -79,7 +80,7 @@ const PokemonDetailCard = (props: any) => {
           {!pokemonDetails ? (
             <Box />
           ) : (
-            <Box transition={"all 2s ease-out "}>
+            <Box transition={"all 2s ease-out "} key={pokemonId}>
               <Stack p={4}>
                 <Box>
                   <Flex justifyContent={"space-between"}>
@@ -107,7 +108,7 @@ const PokemonDetailCard = (props: any) => {
                                   : pokemonColor
                               }
                               margin={"5px"}
-                              color={"gray.200"}
+                              color={"gray.400"}
                             >
                               {type.type.name !== "" &&
                                 type.type.name.charAt(0).toUpperCase() +
@@ -138,11 +139,11 @@ const PokemonDetailCard = (props: any) => {
                 minH={"300px"}
                 bgColor={pokemonColor === undefined ? "primary" : pokemonColor}
                 borderRadius={"10%"}
-                color={"gray.200"}
+                color={"gray.300"}
                 opacity={0.7}
               >
-                <Tabs colorScheme="whiteAlpha">
-                  <TabList>
+                <Tabs>
+                  <TabList color={"gray.400"}>
                     <Tab fontWeight={"bold"}>About</Tab>
                     <Tab fontWeight={"bold"}>Base Stats</Tab>
                   </TabList>
@@ -150,44 +151,46 @@ const PokemonDetailCard = (props: any) => {
                     <TabPanel>
                       <Stack fontWeight={"medium"}>
                         <Table>
-                          <Tr>
-                            <Td>Species </Td>
-                            <Td fontWeight={"bold"}>
-                              {pokemonDetails.species.name !== "" &&
-                                pokemonDetails.species.name
-                                  .charAt(0)
-                                  .toUpperCase() +
-                                  pokemonDetails.species.name.slice(1)}
-                            </Td>
-                          </Tr>
-                          <Tr>
-                            <Td>Height </Td>
-                            <Td fontWeight={"bold"}>
-                              {Number(pokemonDetails.height) * 10}cm
-                            </Td>
-                          </Tr>
-                          <Tr>
-                            <Td>Weight </Td>
-                            <Td fontWeight={"bold"}>
-                              {Number(pokemonDetails.weight) / 10}kg{" "}
-                            </Td>
-                          </Tr>
-                          <Tr>
-                            <Td>Ablities </Td>
-                            <Td fontWeight={"bold"}>
-                              {pokemonDetails.abilities.map((ability) => {
-                                return (
-                                  <Text>
-                                    {ability.ability.name !== "" &&
-                                      ability.ability.name
-                                        .charAt(0)
-                                        .toUpperCase() +
-                                        ability.ability.name.slice(1)}
-                                  </Text>
-                                );
-                              })}
-                            </Td>
-                          </Tr>
+                          <Tbody>
+                            <Tr>
+                              <Td>Species </Td>
+                              <Td fontWeight={"bold"}>
+                                {pokemonDetails.species.name !== "" &&
+                                  pokemonDetails.species.name
+                                    .charAt(0)
+                                    .toUpperCase() +
+                                    pokemonDetails.species.name.slice(1)}
+                              </Td>
+                            </Tr>
+                            <Tr>
+                              <Td>Height </Td>
+                              <Td fontWeight={"bold"}>
+                                {Number(pokemonDetails.height) * 10}cm
+                              </Td>
+                            </Tr>
+                            <Tr>
+                              <Td>Weight </Td>
+                              <Td fontWeight={"bold"}>
+                                {Number(pokemonDetails.weight) / 10}kg{" "}
+                              </Td>
+                            </Tr>
+                            <Tr>
+                              <Td>Ablities </Td>
+                              <Td fontWeight={"bold"}>
+                                {pokemonDetails.abilities.map((ability) => {
+                                  return (
+                                    <Text>
+                                      {ability.ability.name !== "" &&
+                                        ability.ability.name
+                                          .charAt(0)
+                                          .toUpperCase() +
+                                          ability.ability.name.slice(1)}
+                                    </Text>
+                                  );
+                                })}
+                              </Td>
+                            </Tr>
+                          </Tbody>
                         </Table>
                       </Stack>
                     </TabPanel>
@@ -208,7 +211,9 @@ const PokemonDetailCard = (props: any) => {
                               <Td w={"60%"}>
                                 <Progress
                                   borderRadius={"25px"}
-                                  colorScheme="red"
+                                  colorScheme={
+                                    stat.base_stat < 50 ? "red" : "green"
+                                  }
                                   size="sm"
                                   value={
                                     stat.base_stat !== 0 ? stat.base_stat : 0

@@ -58,7 +58,7 @@ const Header = () => {
               variant={"outline"}
               fontWeight={"medium"}
               defaultValue={searchVal}
-              // onChange={processChange}
+              name="pokemonName"
               onKeyUp={processChange}
               _placeholder={{ color: "red" }}
             />

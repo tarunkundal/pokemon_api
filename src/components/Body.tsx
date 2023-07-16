@@ -24,7 +24,7 @@ const Body = () => {
         gridColumn={"auto"}
       >
         {pokemons.slice(0, pokemonNumbersToShow).map((pokemon, i) => {
-          return <PokemonCard pokemon={pokemon} data={i} key={i} />;
+          return <PokemonCard pokemon={pokemon} key={i} />;
         })}
       </Box>
       {pokemons.length >= pokemonNumbersToShow && (
