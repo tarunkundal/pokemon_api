@@ -16,9 +16,10 @@ import {
   Tbody,
   Td,
   Text,
+  Thead,
   Tr,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { usePokemonStore } from "../store/PokemonProvider";
 
 const PokemonDetailCard = (props: any) => {
@@ -63,6 +64,7 @@ const PokemonDetailCard = (props: any) => {
   console.log(pokemonDetails);
   console.log(pokemonColor);
 
+  // finding svg image of pokemon is present or not
   const svgImgPresent = pokemonDetails.sprites.other.dream_world.front_default;
 
   return (
@@ -91,7 +93,6 @@ const PokemonDetailCard = (props: any) => {
                         }
                         fontSize={{ md: "3rem" }}
                       >
-                        {" "}
                         {pokemonDetails.name !== "" &&
                           pokemonDetails.name.charAt(0).toUpperCase() +
                             pokemonDetails.name.slice(1)}
@@ -236,4 +237,4 @@ const PokemonDetailCard = (props: any) => {
   );
 };
 
-export default PokemonDetailCard;
+export default memo(PokemonDetailCard);

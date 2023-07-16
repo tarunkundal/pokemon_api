@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import BackdropOverlay from "./Modal";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import PokemonDetailCard from "./PokemonDetailCard";
 import { usePokemonStore } from "../store/PokemonProvider";
 
@@ -21,8 +21,9 @@ const PokemonCard = (props: any) => {
 
   const pokemonName = props.pokemon.name;
 
+  // fetching pokemonId
   const fetchPokemonId = async () => {
-    const res = await fetch(props.pokemon.url);
+    const res = await fetch(props.pokemon.url ? props.pokemon.url : "");
     const data = await res.json();
 
     setPokemonId(data.id);
@@ -39,7 +40,9 @@ const PokemonCard = (props: any) => {
     try {
       setIsLoding(true);
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon-species/${pokemonName}/`
+        `https://pokeapi.co/api/v2/pokemon-species/${
+          pokemonName ? pokemonName : ""
+        }/`
       );
       const data = await response.json();
 
@@ -57,6 +60,7 @@ const PokemonCard = (props: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonName]);
 
+  // finding svg image of pokemon is present or not
   const svgImgPresent = pokemonDetails.sprites.other.dream_world.front_default;
 
   return (
@@ -75,7 +79,7 @@ const PokemonCard = (props: any) => {
           h={"270px"}
           m={"1%"}
           bgColor={pkColor === undefined ? "primary" : pkColor}
-          opacity={0.7}
+          opacity={0.6}
           boxShadow={"2xl"}
           borderRadius={"50px"}
           transition={"0.3s all ease-in "}
@@ -135,4 +139,4 @@ const PokemonCard = (props: any) => {
   );
 };
 
-export default PokemonCard;
+export default memo(PokemonCard);
