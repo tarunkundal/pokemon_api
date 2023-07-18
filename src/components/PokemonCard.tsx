@@ -85,10 +85,10 @@ const PokemonCard = (props: any) => {
           transition={"0.3s all ease-in "}
           _hover={{ transform: "scale(1.08)", cursor: "pointer" }}
           bgImage={
-            "url('https://cdn-icons-png.flaticon.com/128/3905/3905499.png')"
+            "url('https://img.icons8.com/?size=512&id=Ody4hAHZW5Fa&format=png')"
           }
           bgRepeat={"no-repeat"}
-          bgPosition={"bottom"}
+          bgSize={"revert"}
           p={"5px"}
           onClick={() => setIsOpen(true)}
         >
@@ -104,7 +104,7 @@ const PokemonCard = (props: any) => {
                   ? pokemonName.toUpperCase()
                   : ""}
               </Heading>
-              <Text
+              <Heading
                 opacity={0.8}
                 color={"teritory"}
                 fontWeight={"bold"}
@@ -121,7 +121,7 @@ const PokemonCard = (props: any) => {
                 ) : (
                   pokemonId
                 )}
-              </Text>
+              </Heading>
             </Flex>
             <Center>
               <Image

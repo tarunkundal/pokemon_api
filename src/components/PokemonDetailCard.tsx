@@ -111,7 +111,7 @@ const PokemonDetailCard = (props: any) => {
                                   : pokemonColor
                               }
                               margin={"5px"}
-                              color={"white"}
+                              color={"aqua"}
                             >
                               {type.type.name !== "" &&
                                 type.type.name.charAt(0).toUpperCase() +
@@ -148,7 +148,7 @@ const PokemonDetailCard = (props: any) => {
                 opacity={0.7}
               >
                 <Tabs>
-                  <TabList color={"gray.400"}>
+                  <TabList color={"HighlightText"}>
                     <Tab fontWeight={"bold"}>About</Tab>
                     <Tab fontWeight={"bold"}>Base Stats</Tab>
                   </TabList>
@@ -157,9 +157,9 @@ const PokemonDetailCard = (props: any) => {
                       <Stack fontWeight={"medium"}>
                         <Table>
                           <Tbody>
-                            <Tr>
+                            <Tr fontWeight={"bold"}>
                               <Td>Species </Td>
-                              <Td fontWeight={"bold"}>
+                              <Td>
                                 {pokemonDetails.species.name !== "" &&
                                   pokemonDetails.species.name
                                     .charAt(0)
@@ -167,21 +167,17 @@ const PokemonDetailCard = (props: any) => {
                                     pokemonDetails.species.name.slice(1)}
                               </Td>
                             </Tr>
-                            <Tr>
+                            <Tr fontWeight={"bold"}>
                               <Td>Height </Td>
-                              <Td fontWeight={"bold"}>
-                                {Number(pokemonDetails.height) * 10}cm
-                              </Td>
+                              <Td>{Number(pokemonDetails.height) * 10}cm</Td>
                             </Tr>
-                            <Tr>
+                            <Tr fontWeight={"bold"}>
                               <Td>Weight </Td>
-                              <Td fontWeight={"bold"}>
-                                {Number(pokemonDetails.weight) / 10}kg{" "}
-                              </Td>
+                              <Td>{Number(pokemonDetails.weight) / 10}kg </Td>
                             </Tr>
-                            <Tr>
+                            <Tr fontWeight={"bold"}>
                               <Td>Ablities </Td>
-                              <Td fontWeight={"bold"}>
+                              <Td>
                                 {pokemonDetails.abilities.map((ability) => {
                                   return (
                                     <Text>
@@ -200,7 +196,7 @@ const PokemonDetailCard = (props: any) => {
                       </Stack>
                     </TabPanel>
                     <TabPanel>
-                      <Table>
+                      <Table fontWeight={"bold"}>
                         {pokemonDetails.stats.map((stat) => {
                           return (
                             <Tr>

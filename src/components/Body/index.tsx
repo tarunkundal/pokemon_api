@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import PokemonCard from "./PokemonCard";
-import { Box, Button, Center } from "@chakra-ui/react";
-import useFetchPokemons from "../hooks/useFetchPokemons";
-import { usePokemonStore } from "../store/PokemonProvider";
+import PokemonCard from "../PokemonCard";
+import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import useFetchPokemons from "../../hooks/useFetchPokemons";
+import { usePokemonStore } from "../../store/PokemonProvider";
+import BackToTop from "./BackToTopButton";
 
 const Body = () => {
   const { pokemons } = usePokemonStore();
@@ -17,24 +18,30 @@ const Body = () => {
   return (
     <>
       <Box
-        display={{ base: "block", md: "grid" }}
-        gridTemplateColumns={{ base: "repeat(2 , 30%)", md: "repeat(3 , 2fr)" }}
-        gridGap={"9"}
+        display={{ base: "inline-grid", md: "inline-grid" }}
+        gridTemplateColumns={{
+          base: "repeat(auto , 30%)",
+          md: "repeat(3 , 2fr)",
+        }}
+        gridGap={9}
         p={"5%"}
       >
         {pokemons.slice(0, pokemonNumbersToShow).map((pokemon, i) => {
           return <PokemonCard pokemon={pokemon} key={i} />;
         })}
       </Box>
+      <BackToTop />
       {pokemons.length >= pokemonNumbersToShow && (
-        <Center m={"3"}>
+        <Center>
           <Button
             color="secondary"
             bg={"button"}
             onClick={handlePokemonToShow}
             _hover={{ bg: "teritory" }}
+            m={5}
+            mx={"auto"}
           >
-            load more
+            Load more Pokemons
           </Button>
         </Center>
       )}

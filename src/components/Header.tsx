@@ -41,14 +41,12 @@ const Header = () => {
       bg={"primary"}
     >
       <Image
-        src={
-          "https://cdn-icons-png.flaticon.com/512/528/528098.png?w=1380&t=st=1686712774~exp=1686713374~hmac=939f3d110d2ffbf74c52d619dae6785dac5704cfb6958bb4ebbba4271232e7eb"
-        }
+        src={"https://img.icons8.com/?size=2x&id=13708&format=png"}
         alt="logo"
         w={"12"}
         left={"2rem"}
       />
-      <Stack w={"40%"} color={"black"}>
+      <Stack w={{ base: "70%", md: "40%" }} color={"black"}>
         <form onSubmit={handleSubmit}>
           <InputGroup>
             <Input

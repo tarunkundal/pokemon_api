@@ -2,12 +2,19 @@ import { extendTheme } from "@chakra-ui/react";
 import bg from "../utils/output-onlinepngtools.png";
 
 const theme = extendTheme({
+  fonts: {
+    body: "Playfair Display, serif",
+    heading: "Lumanosimo, cursive",
+    // mono: "Menlo, monospace",
+  },
+
   styles: {
     global: {
       // styles for the `body`
       body: {
         bg: "gray.50",
         backgroundImage: bg,
+        heading: "",
       },
     },
   },
