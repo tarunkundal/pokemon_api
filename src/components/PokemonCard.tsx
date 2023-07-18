@@ -1,11 +1,11 @@
 import {
   Card,
   CardBody,
+  Center,
   Flex,
   Heading,
   Image,
   Spinner,
-  Stack,
   Text,
 } from "@chakra-ui/react";
 import BackdropOverlay from "./Modal";
@@ -87,51 +87,57 @@ const PokemonCard = (props: any) => {
           bgImage={
             "url('https://cdn-icons-png.flaticon.com/128/3905/3905499.png')"
           }
-          bgSize={"45%"}
           bgRepeat={"no-repeat"}
           bgPosition={"bottom"}
           p={"5px"}
           onClick={() => setIsOpen(true)}
         >
           <CardBody>
-            <Flex>
-              <Stack w={"50%"} spacing={5}>
-                <Heading color={"primary"} my={"auto"} fontSize={"25px"}>
-                  {props.pokemon.name !== undefined
-                    ? pokemonName.toUpperCase()
-                    : ""}
-                </Heading>
-              </Stack>
-              <Stack w={"50%"}>
-                <Text
-                  opacity={0.6}
-                  color={"secondary"}
-                  fontWeight={"bold"}
-                  fontSize={"3xl"}
-                  ml={"50%"}
-                >
-                  {"#"}
-                  {pokemonId === undefined ? (
-                    ""
-                  ) : +pokemonId < 100 ? (
-                    <>
-                      {"0"}
-                      {pokemonId}
-                    </>
-                  ) : (
-                    pokemonId
-                  )}
-                </Text>
-                <Image
-                  boxSize={"90%"}
-                  src={
-                    svgImgPresent
-                      ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`
-                      : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokemonId}.png`
-                  }
-                />
-              </Stack>
+            <Flex px={5} justifyContent={"space-between"}>
+              <Heading
+                color={"secondary"}
+                my={"auto"}
+                fontSize={"25px"}
+                w={"60%"}
+              >
+                {props.pokemon.name !== undefined
+                  ? pokemonName.toUpperCase()
+                  : ""}
+              </Heading>
+              <Text
+                opacity={0.8}
+                color={"teritory"}
+                fontWeight={"bold"}
+                fontSize={"3xl"}
+              >
+                {"#"}
+                {pokemonId === undefined ? (
+                  ""
+                ) : +pokemonId < 100 ? (
+                  <>
+                    {"0"}
+                    {pokemonId}
+                  </>
+                ) : (
+                  pokemonId
+                )}
+              </Text>
             </Flex>
+            <Center>
+              <Image
+                src={
+                  svgImgPresent
+                    ? `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemonId}.svg`
+                    : `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${pokemonId}.png`
+                }
+                transition={"ease-in-out all .5s"}
+                _hover={{
+                  transform: "scale(1.2)",
+                }}
+                alt="PokemonImg"
+                h={"180px"}
+              />
+            </Center>
           </CardBody>
         </Card>
       )}

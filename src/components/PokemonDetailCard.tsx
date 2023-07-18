@@ -16,7 +16,6 @@ import {
   Tbody,
   Td,
   Text,
-  Thead,
   Tr,
 } from "@chakra-ui/react";
 import { memo, useEffect, useState } from "react";
@@ -71,11 +70,12 @@ const PokemonDetailCard = (props: any) => {
     <>
       {isLoading ? (
         <Spinner
-          size={"xl"}
           position={"absolute"}
           top={"50%"}
           left={"50%"}
           transform={"translate(-50%,-50%)"}
+          color="red"
+          fontSize={"2xl"}
         />
       ) : (
         <>
@@ -89,7 +89,9 @@ const PokemonDetailCard = (props: any) => {
                     <Flex direction={"column"}>
                       <Heading
                         color={
-                          pokemonColor === undefined ? "primary" : pokemonColor
+                          pokemonColor === undefined
+                            ? "primary"
+                            : `${pokemonColor}.500`
                         }
                         fontSize={{ md: "3rem" }}
                       >
@@ -97,7 +99,7 @@ const PokemonDetailCard = (props: any) => {
                           pokemonDetails.name.charAt(0).toUpperCase() +
                             pokemonDetails.name.slice(1)}
                       </Heading>
-                      <Flex justifyContent={"center"} opacity={0.5}>
+                      <Flex justifyContent={"center"} opacity={0.7}>
                         {pokemonDetails.types.map((type) => {
                           return (
                             <Text
@@ -109,7 +111,7 @@ const PokemonDetailCard = (props: any) => {
                                   : pokemonColor
                               }
                               margin={"5px"}
-                              color={"gray.400"}
+                              color={"white"}
                             >
                               {type.type.name !== "" &&
                                 type.type.name.charAt(0).toUpperCase() +
@@ -132,6 +134,8 @@ const PokemonDetailCard = (props: any) => {
                     alt="Image"
                     boxSize={{ base: 40, md: 56 }}
                     zIndex={2}
+                    transition={"ease-in-out all .8s"}
+                    _hover={{ transform: "scale(1.2)" }}
                   />
                 </Center>
               </Stack>
