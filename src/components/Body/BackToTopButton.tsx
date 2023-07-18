@@ -11,7 +11,8 @@ const BackToTop = () => {
   return (
     <>
       <Button
-        ml={"80%"}
+        m={2}
+        ml={{ md: "80%" }}
         onClick={handleBackToTop}
         color={"red"}
         colorScheme="orange"
