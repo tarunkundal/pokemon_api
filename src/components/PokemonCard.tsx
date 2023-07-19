@@ -24,7 +24,7 @@ const PokemonCard = (props: any) => {
 
   // fetching pokemonId
   const fetchPokemonId = async () => {
-    const res = await fetch(props.pokemon.url ? props.pokemon.url : undefined);
+    const res = await fetch(props.pokemon.url ? props.pokemon.url : "");
     const data = await res.json();
 
     setPokemonId(data.id);
@@ -68,7 +68,10 @@ const PokemonCard = (props: any) => {
           boxShadow={"2xl"}
           borderRadius={"50px"}
           transition={"0.3s all ease-in "}
-          _hover={{ transform: "scale(1.08)", cursor: "pointer" }}
+          _hover={{
+            transform: "scale(1.08) ",
+            cursor: "pointer",
+          }}
           bgImage={
             "url('https://img.icons8.com/?size=512&id=Ody4hAHZW5Fa&format=png')"
           }
@@ -117,7 +120,7 @@ const PokemonCard = (props: any) => {
                 }
                 transition={"ease-in-out all .5s"}
                 _hover={{
-                  transform: "scale(1.2)",
+                  transform: "scale(1.2) rotate(-5deg)",
                 }}
                 alt="PokemonImg"
                 h={"180px"}

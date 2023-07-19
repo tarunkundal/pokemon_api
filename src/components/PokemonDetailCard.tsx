@@ -111,7 +111,7 @@ const PokemonDetailCard = (props: any) => {
                     boxSize={{ base: 40, md: 56 }}
                     zIndex={2}
                     transition={"ease-in-out all .8s"}
-                    _hover={{ transform: "scale(1.2)" }}
+                    _hover={{ transform: "scale(1.2) rotate(10deg) " }}
                   />
                 </Center>
               </Stack>
@@ -124,7 +124,7 @@ const PokemonDetailCard = (props: any) => {
                 opacity={0.7}
               >
                 <Tabs>
-                  <TabList color={"HighlightText"}>
+                  <TabList color={"HighlightText"} textColor={"secondary"}>
                     <Tab fontWeight={"bold"}>About</Tab>
                     <Tab fontWeight={"bold"}>Base Stats</Tab>
                   </TabList>
