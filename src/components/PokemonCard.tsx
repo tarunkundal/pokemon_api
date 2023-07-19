@@ -6,59 +6,36 @@ import {
   Heading,
   Image,
   Spinner,
-  Text,
 } from "@chakra-ui/react";
 import BackdropOverlay from "./Modal";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import PokemonDetailCard from "./PokemonDetailCard";
 import { usePokemonStore } from "../store/PokemonProvider";
+import useFetchPokemonColor from "../hooks/useFetchPokemonColor";
 
 const PokemonCard = (props: any) => {
-  const [pkColor, setPkColor] = useState();
   const [pokemonId, setPokemonId] = useState();
-  const [isLoading, setIsLoding] = useState(false);
   const { pokemonDetails } = usePokemonStore();
 
   const pokemonName = props.pokemon.name;
 
+  // fetching pokemon color
+  const { pokemonColor, isLoading } = useFetchPokemonColor(pokemonName);
+
   // fetching pokemonId
   const fetchPokemonId = async () => {
-    const res = await fetch(props.pokemon.url ? props.pokemon.url : "");
+    const res = await fetch(props.pokemon.url ? props.pokemon.url : undefined);
     const data = await res.json();
 
     setPokemonId(data.id);
   };
-  fetchPokemonId();
+  props.pokemon.url && fetchPokemonId();
 
+  // state for modal
   const [isOpen, setIsOpen] = useState(false);
-
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  const fetchPokemonColor = async () => {
-    try {
-      setIsLoding(true);
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon-species/${
-          pokemonName ? pokemonName : ""
-        }/`
-      );
-      const data = await response.json();
-
-      setIsLoding(false);
-
-      let color = data.color.name;
-      setPkColor(color);
-    } catch (error) {
-      console.log("Error while fetching pokemon color", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPokemonColor();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pokemonName]);
 
   // finding svg image of pokemon is present or not
   const svgImgPresent = pokemonDetails.sprites.other.dream_world.front_default;
@@ -71,14 +48,22 @@ const PokemonCard = (props: any) => {
         </BackdropOverlay>
       )}
       {isLoading ? (
-        <Spinner size={"xl"} />
+        <Center>
+          <Spinner
+            thickness="6px"
+            speed="0.75s"
+            emptyColor="primary"
+            color="button"
+            size="xl"
+          />
+        </Center>
       ) : (
         <Card
           overflow="hidden"
           w={"400px"}
           h={"270px"}
           m={"1%"}
-          bgColor={pkColor === undefined ? "primary" : pkColor}
+          bgColor={pokemonColor === undefined ? "primary" : pokemonColor}
           opacity={0.6}
           boxShadow={"2xl"}
           borderRadius={"50px"}

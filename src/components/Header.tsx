@@ -1,5 +1,4 @@
 import {
-  Box,
   Image,
   Input,
   InputGroup,
@@ -70,7 +69,11 @@ const Header = () => {
           </InputGroup>
         </form>
       </Stack>
-      <Box />
+      <Image
+        src={"https://img.icons8.com/?size=2x&id=13708&format=png"}
+        alt="logo"
+        w={"12"}
+      />
     </Stack>
   );
 };

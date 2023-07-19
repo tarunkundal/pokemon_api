@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PokemonCard from "../PokemonCard";
-import { Box, Button, Center, Flex } from "@chakra-ui/react";
+import { Box, Button, Center } from "@chakra-ui/react";
 import useFetchPokemons from "../../hooks/useFetchPokemons";
 import { usePokemonStore } from "../../store/PokemonProvider";
 import BackToTop from "./BackToTopButton";

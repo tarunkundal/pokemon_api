@@ -18,47 +18,19 @@ import {
   Text,
   Tr,
 } from "@chakra-ui/react";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import { usePokemonStore } from "../store/PokemonProvider";
+import useFetchPokemonDetails from "../hooks/useFetchPokemonDetails";
+import useFetchPokemonColor from "../hooks/useFetchPokemonColor";
 
 const PokemonDetailCard = (props: any) => {
-  const { setPokemonDetails, pokemonDetails } = usePokemonStore();
-  const [pokemonColor, setPokemonColor] = useState();
-  const [isLoading, setIsLoding] = useState(false);
+  const { pokemonDetails } = usePokemonStore();
   const pokemonId = pokemonDetails?.id;
+  const pokemonName = props.pokemon;
 
-  useEffect(() => {
-    const fetchPokemonDetail = async () => {
-      try {
-        setIsLoding(true);
-        const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${props.pokemon}`
-        );
-
-        const data = await res.json();
-
-        setPokemonDetails(data);
-        setIsLoding(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPokemonDetail();
-
-    const fetchPokemonColor = async () => {
-      try {
-        const res = await fetch(
-          `https://pokeapi.co/api/v2/pokemon-species/${props.pokemon}/`
-        );
-        const data = await res.json();
-        setPokemonColor(data.color.name);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchPokemonColor();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.pokemon]);
+  //fetching pokemon details and its color
+  const { isLoading } = useFetchPokemonDetails(pokemonName);
+  const { pokemonColor } = useFetchPokemonColor(pokemonName);
 
   console.log(pokemonDetails);
   console.log(pokemonColor);
@@ -74,8 +46,11 @@ const PokemonDetailCard = (props: any) => {
           top={"50%"}
           left={"50%"}
           transform={"translate(-50%,-50%)"}
-          color="red"
-          fontSize={"2xl"}
+          thickness="4px"
+          speed="0.75s"
+          emptyColor="primary"
+          color="button"
+          size="xl"
         />
       ) : (
         <>
@@ -103,6 +78,7 @@ const PokemonDetailCard = (props: any) => {
                         {pokemonDetails.types.map((type) => {
                           return (
                             <Text
+                              key={type.type.name}
                               p={"7px"}
                               borderRadius={"25px"}
                               bg={
@@ -199,7 +175,7 @@ const PokemonDetailCard = (props: any) => {
                       <Table fontWeight={"bold"}>
                         {pokemonDetails.stats.map((stat) => {
                           return (
-                            <Tr>
+                            <Tr key={Math.random() * stat.base_stat}>
                               <Td w={"25%"}>
                                 {stat.stat.name !== ""
                                   ? stat.stat.name.charAt(0).toUpperCase() +
