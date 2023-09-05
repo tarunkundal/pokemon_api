@@ -5,7 +5,6 @@ const theme = extendTheme({
   fonts: {
     body: "Playfair Display, serif",
     heading: "Lumanosimo, cursive",
-    // mono: "Menlo, monospace",
   },
 
   styles: {

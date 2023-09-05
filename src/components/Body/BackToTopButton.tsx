@@ -14,7 +14,7 @@ const BackToTop = () => {
         m={2}
         ml={{ md: "80%" }}
         onClick={handleBackToTop}
-        color={"red"}
+        color={"white"}
         colorScheme="orange"
       >
         Back To Top <BsArrowUp fontSize={"2rem"} />

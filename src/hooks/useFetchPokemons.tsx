@@ -18,7 +18,7 @@ const useFetchPokemons = () => {
     };
     fetchPokemons();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setPokemons]);
 };
 
 export default useFetchPokemons;

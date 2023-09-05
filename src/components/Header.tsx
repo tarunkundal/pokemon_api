@@ -24,10 +24,6 @@ const Header = () => {
   // debounced func
   const processChange = useDebounce((e) => handleOnChange(e), 500);
 
-  // submit form handler
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
   return (
     <Stack
       h={"80px"}
@@ -46,28 +42,26 @@ const Header = () => {
         left={"2rem"}
       />
       <Stack w={{ base: "70%", md: "40%" }} color={"black"}>
-        <form onSubmit={handleSubmit}>
-          <InputGroup>
-            <Input
-              placeholder="Search Your Faviourate Pokemon"
-              border={"2px"}
-              borderColor={"teritory"}
-              variant={"outline"}
-              fontWeight={"medium"}
-              defaultValue={searchVal}
-              name="pokemonName"
-              onKeyUp={processChange}
-              _placeholder={{ color: "red" }}
-            />
-            <InputRightElement
-              fontSize={"22px"}
-              color={"button"}
-              _hover={{ cursor: "pointer", color: "teritory" }}
-            >
-              <FiSearch type="submit" />
-            </InputRightElement>
-          </InputGroup>
-        </form>
+        <InputGroup>
+          <Input
+            placeholder="Search Your Faviourate Pokemon"
+            border={"2px"}
+            borderColor={"teritory"}
+            variant={"outline"}
+            fontWeight={"medium"}
+            defaultValue={searchVal}
+            name="pokemonName"
+            onKeyUp={processChange}
+            _placeholder={{ color: "red" }}
+          />
+          <InputRightElement
+            fontSize={"22px"}
+            color={"button"}
+            _hover={{ cursor: "pointer", color: "teritory" }}
+          >
+            <FiSearch type="submit" />
+          </InputRightElement>
+        </InputGroup>
       </Stack>
       <Image
         src={"https://img.icons8.com/?size=2x&id=13708&format=png"}
