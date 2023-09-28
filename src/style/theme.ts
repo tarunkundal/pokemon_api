@@ -13,7 +13,6 @@ const theme = extendTheme({
       body: {
         bg: "gray.50",
         backgroundImage: bg,
-        heading: "",
       },
     },
   },
